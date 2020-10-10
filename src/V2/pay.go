@@ -36,12 +36,12 @@ func (c WxPay) request(url string, body io.Reader, cert bool) (map[string]string
 		// 微信支付HTTPS服务器证书的根证书  .pem格式
 		rootCa, _ := ioutil.ReadFile(c.config.APIClientPath.Root)
 
-		pool := x509.NewCertPool()
-		pool.AppendCertsFromPEM(rootCa)
+		//pool := x509.NewCertPool()
+		//pool.AppendCertsFromPEM(rootCa)
 
 		client = http.Client{Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
-				RootCAs:      pool,
+				//RootCAs:      pool,
 				Certificates: []tls.Certificate{certs},
 			},
 		}}
