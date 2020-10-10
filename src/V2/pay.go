@@ -56,7 +56,7 @@ func (c WxPay) request(url string, body io.Reader, cert bool) (map[string]string
 	if err == nil {
 		defer resp.Body.Close()
 		b, _ := ioutil.ReadAll(resp.Body)
-		fmt.Println(b)
+		fmt.Printf("%s",b)
 		var result PublicResponse
 		err := xml.Unmarshal(b, &result)
 		if err !=nil {
