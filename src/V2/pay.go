@@ -7,7 +7,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"io"
-	"io/ioutil"
+	//"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
@@ -34,7 +34,7 @@ func (c WxPay) request(url string, body io.Reader, cert bool) (map[string]string
 		// 微信提供的API证书,证书和证书密钥 .pem格式
 		certs, _ := tls.LoadX509KeyPair(c.config.APIClientPath.Cert, c.config.APIClientPath.Key)
 		// 微信支付HTTPS服务器证书的根证书  .pem格式
-		rootCa, _ := ioutil.ReadFile(c.config.APIClientPath.Root)
+		//rootCa, _ := ioutil.ReadFile(c.config.APIClientPath.Root)
 
 		//pool := x509.NewCertPool()
 		//pool.AppendCertsFromPEM(rootCa)
