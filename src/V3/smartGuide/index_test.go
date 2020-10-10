@@ -7,7 +7,7 @@
 package smartGuide
 
 import (
-	"github.com/wleven/wxpay/global"
+	"github.com/hxpdeihgu/wxpay/global"
 	"testing"
 )
 
