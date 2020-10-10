@@ -7,8 +7,8 @@
 package smartGuide
 
 import (
-	"github.com/wleven/hxpdeihgu/src/config"
-	"github.com/wleven/hxpdeihgu/utils"
+	"github.com/hxpdeihgu/smartGuide/src/config"
+	"github.com/hxpdeihgu/smartGuide/utils"
 )
 
 func New(config *config.V3) *SmartGuide {
