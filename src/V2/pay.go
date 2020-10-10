@@ -7,7 +7,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"io"
-	//"io/ioutil"
+	"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
