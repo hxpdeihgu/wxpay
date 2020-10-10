@@ -11,6 +11,7 @@ import (
 	"github.com/hxpdeihgu/wxpay/utils"
 )
 
+
 func New(config *config.V3) *SmartGuide {
 	return &SmartGuide{config: config}
 }
