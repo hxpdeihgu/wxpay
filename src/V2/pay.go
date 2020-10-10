@@ -7,6 +7,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"io"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -55,9 +56,13 @@ func (c WxPay) request(url string, body io.Reader, cert bool) (map[string]string
 	if err == nil {
 		defer resp.Body.Close()
 		b, _ := ioutil.ReadAll(resp.Body)
+		fmt.Println(b)
 		var result PublicResponse
-		_ = xml.Unmarshal(b, &result)
-		err := result.ResultCheck()
+		err := xml.Unmarshal(b, &result)
+		if err !=nil {
+			return nil, err
+		}
+		err = result.ResultCheck()
 		if err == nil {
 			return utils.XML2MAP(b), nil
 		}
