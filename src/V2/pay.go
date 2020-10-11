@@ -2,7 +2,7 @@ package V2
 
 import (
 	"crypto/tls"
-	//"crypto/x509"
+	"crypto/x509"
 	"encoding/json"
 	"encoding/xml"
 	"errors"
@@ -33,16 +33,25 @@ func (c WxPay) request(url string, body io.Reader, cert bool) (map[string]string
 			return nil, err
 		}
 		// 微信提供的API证书,证书和证书密钥 .pem格式
-		certs, _ := tls.LoadX509KeyPair(c.config.APIClientPath.Cert, c.config.APIClientPath.Key)
+		certs, err := tls.LoadX509KeyPair(c.config.APIClientPath.Cert, c.config.APIClientPath.Key)
+		
+		if err !=nil {
+			fmt.Printf("tls.LoadX509KeyPair -->%s",err)
+			return nil, err
+		}
 		// 微信支付HTTPS服务器证书的根证书  .pem格式
-		//rootCa, _ := ioutil.ReadFile(c.config.APIClientPath.Root)
+		rootCa, err:= ioutil.ReadFile(c.config.APIClientPath.Root)
+		if err !=nil {
+			fmt.Printf("ioutil.ReadFile-->%s",err)
+			return nil, err
+		}
 
-		//pool := x509.NewCertPool()
-		//pool.AppendCertsFromPEM(rootCa)
+		pool := x509.NewCertPool()
+		pool.AppendCertsFromPEM(rootCa)
 
 		client = http.Client{Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
-				//RootCAs:      pool,
+				RootCAs:      pool,
 				Certificates: []tls.Certificate{certs},
 			},
 		}}
